@@ -1,11 +1,13 @@
 import './App.css';
 import Navbar from './components/Navbar';
 
-function App() { 
+function App() {
   return (
-   <>
-<Navbar/>
-  </>
+    <>
+      {/* <Navbar title="TextUtils" aboutText="About TextUtils" /> */}
+      <Navbar title="TextUtils" />
+      {/* <Navbar /> */}
+    </>
   );
 }
 
