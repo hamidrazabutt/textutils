@@ -4,6 +4,7 @@ import TextForm from './components/TextForm';
 import About from './components/About';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light'); //Wether Dark mode is enabled or not
@@ -38,19 +39,31 @@ function App() {
       document.title = 'TextUtils - Light Mode';
     }
   };
+
   return (
     <>
       {/* { <Navbar title="TextUtils" aboutText="About TextUtils" /> } */}
       {/* <Navbar /> */}
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <TextForm
-          showAlert={showAlert}
-          heading="Enter the text to analyze below"
-          mode={mode}
-        />
-      </div>
+      <Router>
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Switch>
+            {/* /users --> Component 1
+              /users/home --> Component 2 */}
+            <Route exact path="/about">
+              <About />
+            </Route>
+            <Route exact path="/">
+              <TextForm
+                showAlert={showAlert}
+                heading="Enter the text to analyze below"
+                mode={mode}
+              />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </>
   );
 }
